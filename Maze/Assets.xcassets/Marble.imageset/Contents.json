@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "Spaceship.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "perhaps_it_s_a_marble_orb_png_by_manoluv-d6v0p50.png",
       "scale" : "2x"
     },
     {
