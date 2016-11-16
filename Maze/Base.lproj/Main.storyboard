@@ -99,6 +99,16 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="q3C-Ix-FIo">
                                 <rect key="frame" x="411" y="78" width="20" height="20"/>
                             </activityIndicatorView>
+                            <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2yX-pZ-fY8">
+                                <rect key="frame" x="0.0" y="215" width="259" height="152"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="259" id="RGR-4w-RW2"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="GR7-CN-fFN" id="Mdb-Q1-dEs"/>
+                                    <outlet property="delegate" destination="GR7-CN-fFN" id="SKI-Kn-V1D"/>
+                                </connections>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -110,6 +120,7 @@
                             <constraint firstItem="rq8-Fd-nJi" firstAttribute="leading" secondItem="atW-r4-Xj4" secondAttribute="trailing" constant="15" id="CP5-H7-xfN"/>
                             <constraint firstItem="wsL-xE-11S" firstAttribute="leading" secondItem="rq8-Fd-nJi" secondAttribute="trailing" constant="21" id="Fj2-ua-eD8"/>
                             <constraint firstItem="wsL-xE-11S" firstAttribute="centerY" secondItem="rq8-Fd-nJi" secondAttribute="centerY" id="QwE-d0-Ctk"/>
+                            <constraint firstItem="2yX-pZ-fY8" firstAttribute="top" secondItem="rq8-Fd-nJi" secondAttribute="bottom" constant="13" id="UnH-pX-fBx"/>
                             <constraint firstItem="rq8-Fd-nJi" firstAttribute="top" secondItem="PAj-2d-9eu" secondAttribute="bottom" constant="24" id="UqA-LP-PZU"/>
                             <constraint firstItem="iLh-rJ-Gpk" firstAttribute="centerY" secondItem="PAj-2d-9eu" secondAttribute="centerY" id="bFE-gN-j5z"/>
                             <constraint firstItem="PAj-2d-9eu" firstAttribute="top" secondItem="zuD-jF-WgO" secondAttribute="bottom" constant="15" id="fCq-Qx-uCN"/>
@@ -120,6 +131,7 @@
                             <constraint firstItem="0o5-Dg-nPs" firstAttribute="top" secondItem="dra-tG-k1b" secondAttribute="bottom" id="qNO-eK-EcI"/>
                             <constraint firstItem="q3C-Ix-FIo" firstAttribute="leading" secondItem="zuD-jF-WgO" secondAttribute="trailing" constant="8" id="uEl-KB-YKj"/>
                             <constraint firstItem="atW-r4-Xj4" firstAttribute="centerY" secondItem="rq8-Fd-nJi" secondAttribute="centerY" id="uSu-Ac-Ane"/>
+                            <constraint firstItem="2yX-pZ-fY8" firstAttribute="leading" secondItem="sla-v1-ffr" secondAttribute="leadingMargin" constant="-20" id="vZM-R3-pJ6"/>
                             <constraint firstItem="rq8-Fd-nJi" firstAttribute="leading" secondItem="PAj-2d-9eu" secondAttribute="leading" id="vtQ-bU-63q"/>
                             <constraint firstItem="0o5-Dg-nPs" firstAttribute="leading" secondItem="sla-v1-ffr" secondAttribute="leadingMargin" constant="-20" id="xPv-tu-w5H"/>
                         </constraints>
@@ -129,6 +141,7 @@
                         <outlet property="activityIndiactor" destination="q3C-Ix-FIo" id="hwa-3k-rhA"/>
                         <outlet property="heightLabel" destination="wsL-xE-11S" id="fDe-Zz-KKR"/>
                         <outlet property="heightSlider" destination="rq8-Fd-nJi" id="zfG-XY-ycR"/>
+                        <outlet property="mazePicker" destination="2yX-pZ-fY8" id="WVU-uG-ScK"/>
                         <outlet property="widthLabel" destination="flc-6b-9uf" id="vvX-E6-Jpf"/>
                         <outlet property="widthSlider" destination="PAj-2d-9eu" id="1oL-yc-rkC"/>
                     </connections>

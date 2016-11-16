@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PauseViewController: UIViewController {
+class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet var widthSlider: UISlider?
     @IBOutlet var heightSlider: UISlider?
@@ -17,6 +17,9 @@ class PauseViewController: UIViewController {
     @IBOutlet var heightLabel: UILabel?
     
     @IBOutlet var activityIndiactor: UIActivityIndicatorView?
+    
+    @IBOutlet var mazePicker: UIPickerView?
+    var sampleMazes = ["small", "first", "second"]
     
     var mazeWidth = 20
     var mazeHeight = 20
@@ -37,6 +40,7 @@ class PauseViewController: UIViewController {
         
         updateLabels()
         updateSliders()
+        updatePicker()
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,6 +67,7 @@ class PauseViewController: UIViewController {
             _ in
             DispatchQueue.main.async {
                 self.activityIndiactor?.stopAnimating()
+                self.updatePicker()
             }
         })
     }
@@ -97,5 +102,43 @@ class PauseViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func updatePicker() {
+        if let currentMaze = MazeHandler.sharedInstance.currentMaze, let name = currentMaze.name {
+            if let idx = sampleMazes.index(of: name) {
+                mazePicker?.selectRow(idx, inComponent: 0, animated: true)
+            }
+        } else {
+            mazePicker?.selectRow(sampleMazes.count, inComponent: 0, animated: true)
+        }
+    }
+    
+    // MARK: - PickerViewDataSource
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return sampleMazes.count + 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return row < sampleMazes.count ? sampleMazes[row] : "Custom"
+    }
+    
+    // MARK: - PickerViewDelegate
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let _ = MazeHandler.sharedInstance.readMaze(fromFilename: sampleMazes[row], type: "maze")
+        
+        if let currentMaze = MazeHandler.sharedInstance.currentMaze {
+            mazeWidth = currentMaze.width
+            mazeHeight = currentMaze.height
+        }
+        
+        updateLabels()
+        updateSliders()
+    }
 
 }

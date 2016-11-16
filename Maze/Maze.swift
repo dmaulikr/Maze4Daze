@@ -53,6 +53,8 @@ struct Maze {
     
     let tiles: [Tile]
     
+    var name: String?
+    
     init(width: Int, height: Int, tiles: [Tile]) {
         self.width = width
         self.height = height

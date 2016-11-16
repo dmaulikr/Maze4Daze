@@ -26,6 +26,8 @@ class MazeHandler {
             do {
                 let text = try String(contentsOfFile: path, encoding: String.Encoding.utf8)
                 currentMaze = try Maze.deserialize(mazeFile: text)
+                currentMaze?.name = filename
+                self.notifyObserversOfNewMaze()
                 return currentMaze
             } catch _ {
                 return nil
@@ -45,6 +47,7 @@ class MazeHandler {
             if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                 do {
                     self.currentMaze = try Maze.deserialize(mazeFile: utf8Text)
+                    self.currentMaze?.name = nil
                     completion?(self.currentMaze)
                     self.notifyObserversOfNewMaze()
                 } catch let mazeError {
