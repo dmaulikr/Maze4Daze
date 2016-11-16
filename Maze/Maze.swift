@@ -14,6 +14,15 @@ extension Bool {
     }
 }
 
+enum MazeError : Error {
+    case NotEnoughLines
+    case BadHeader
+    case ParseWidth
+    case ParseHeight
+    case BadHeight
+    case BadWidth(line: Int)
+}
+
 struct Tile {
     let position: (Int, Int)
     
@@ -55,27 +64,27 @@ struct Maze {
         return Maze(width: 0, height: 0, tiles: [])
     }
     
-    static func deserialize(mazeFile: String) -> Maze {
+    static func deserialize(mazeFile: String) throws -> Maze {
         var lines = mazeFile.components(separatedBy: "\n")
         if let lastLine = lines.last, lastLine == "" {
             lines.removeLast()
         }
-        assert(lines.count > 1, "Not enough lines!")
+        guard lines.count > 1 else { throw MazeError.NotEnoughLines }
         
         let header = lines[0]
         lines.remove(at: 0)
         let headerComponents = header.components(separatedBy: " ")
-        assert(headerComponents.count == 2, "Bad header!")
+        guard headerComponents.count == 2 else { throw MazeError.BadHeader }
         
-        guard let width = Int(headerComponents[0]) else { assertionFailure("Could not parse width"); return Maze.empty }
-        guard let height = Int(headerComponents[1]) else { assertionFailure("Could not parse height"); return Maze.empty }
+        guard let width = Int(headerComponents[0]) else { throw MazeError.ParseWidth }
+        guard let height = Int(headerComponents[1]) else { throw MazeError.ParseHeight }
         
-        assert(lines.count == height, "Bad height!")
+        guard lines.count == height else { throw MazeError.BadHeight }
         
         var tiles = [Tile]()
         
         for (y, line) in lines.enumerated() {
-            assert(line.characters.count == width, String(format: "Bad width on line %d!", y))
+            guard line.characters.count == width else { throw MazeError.BadWidth(line: y) }
             
             for (x, char) in line.characters.enumerated() {
                 let walls = strtoul(String(char), nil, 16)

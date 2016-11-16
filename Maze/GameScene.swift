@@ -17,15 +17,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let motionManager = CMMotionManager()
     
     override func didMove(to view: SKView) {
-        if let maze = readMaze(fromFilename: "first", type: "maze") {
+        /* if let maze = readMaze(fromFilename: "first", type: "maze") {
             addMaze(maze: maze)
-        }
+        } */
+        
+        generateMaze(width: 20, height: 20, completion: {
+            maze in
+            if let maze = maze {
+                self.addMaze(maze: maze)
+                self.resetMarble()
+            }
+        })
         
         //addScreenBorderWalls()
         
         backgroundColor = SKColor.white
-        
-        resetMarble()
         
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         physicsWorld.contactDelegate = self
@@ -33,6 +39,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         configureMotionManager()
         
         addResetGesture()
+        addPauseGesture()
     }
     
     func addMarble(position: CGPoint, size: CGSize) {
@@ -49,6 +56,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         resetGesture.numberOfTapsRequired = 2
         
         view?.addGestureRecognizer(resetGesture)
+    }
+    
+    func addPauseGesture() {
+        let pauseGesture = UITapGestureRecognizer(target: self, action: #selector(GameScene.pause))
+        
+        pauseGesture.numberOfTapsRequired = 3
+        
+        view?.addGestureRecognizer(pauseGesture)
+    }
+    
+    func pause() {
+        if let gameVC = view?.window?.rootViewController as? GameViewController {
+            gameVC.present(PauseViewController(), animated: true, completion: nil)
+        }
     }
     
     func resetMarble() {
