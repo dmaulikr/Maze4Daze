@@ -76,8 +76,8 @@ struct Maze {
         let headerComponents = header.components(separatedBy: " ")
         guard headerComponents.count == 2 else { throw MazeError.BadHeader }
         
-        guard let width = Int(headerComponents[0]) else { throw MazeError.ParseWidth }
-        guard let height = Int(headerComponents[1]) else { throw MazeError.ParseHeight }
+        guard let height = Int(headerComponents[0]) else { throw MazeError.ParseHeight }
+        guard let width = Int(headerComponents[1]) else { throw MazeError.ParseWidth }
         
         guard lines.count == height else { throw MazeError.BadHeight }
         

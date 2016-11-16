@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit
 import CoreMotion
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+class GameScene: SKScene, SKPhysicsContactDelegate, MazeObserver {
     
     let marble = SKSpriteNode(imageNamed: "Marble")
     
@@ -21,7 +21,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addMaze(maze: maze)
         } */
         
-        generateMaze(width: 20, height: 20, completion: {
+        MazeHandler.sharedInstance.generateMaze(width: 20, height: 20, completion: {
             maze in
             if let maze = maze {
                 self.addMaze(maze: maze)
@@ -40,6 +40,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         addResetGesture()
         addPauseGesture()
+        
+        MazeHandler.sharedInstance.addObserver(observer: self)
     }
     
     func addMarble(position: CGPoint, size: CGSize) {
@@ -68,7 +70,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func pause() {
         if let gameVC = view?.window?.rootViewController as? GameViewController {
-            gameVC.present(PauseViewController(), animated: true, completion: nil)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let pauseViewController = storyboard.instantiateViewController(withIdentifier: "PauseVC") as? PauseViewController {
+                gameVC.present(pauseViewController, animated: true, completion: nil)
+            }
         }
     }
     
@@ -116,6 +121,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func addWall(topLeft: CGPoint, bottomRight: CGPoint) {
         let wall = SKSpriteNode(imageNamed: "Wall")
+        wall.name = "Wall"
         wall.size = CGSize(width: bottomRight.x - topLeft.x, height: topLeft.y - bottomRight.y)
         wall.position = CGPoint(x: topLeft.x + ((bottomRight.x - topLeft.x) / 2.0), y: bottomRight.y + ((topLeft.y - bottomRight.y) / 2.0))
         
@@ -124,6 +130,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         wall.physicsBody?.isDynamic = false
         
         addChild(wall)
+    }
+    
+    func removeMaze() {
+        for child in children {
+            if child.name == "Wall" {
+                child.removeFromParent()
+            }
+        }
     }
     
     func configureMarble() {
@@ -143,6 +157,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func processUserMotion(forUpdate currentTime: CFTimeInterval) {
         if let data = motionManager.accelerometerData {
             marble.physicsBody?.applyForce(CGVector(dx: -10 * CGFloat(data.acceleration.y), dy: 10 * CGFloat(data.acceleration.x)))
+        }
+    }
+    
+    // MARK: - MazeObserver
+    
+    func identifier() -> String {
+        return "GameScene"
+    }
+    
+    func currentMazeDidChange(newMaze: Maze?) {
+        if let maze = newMaze {
+            removeMaze()
+            addMaze(maze: maze)
+            resetMarble()
         }
     }
 }

@@ -9,35 +9,84 @@
 import Foundation
 import Alamofire
 
-func readMaze(fromFilename filename: String, type: String) -> Maze? {
-    if let path = Bundle.main.path(forResource: filename, ofType: type) {
-        do {
-            let text = try String(contentsOfFile: path, encoding: String.Encoding.utf8)
-            let maze = try Maze.deserialize(mazeFile: text)
-            return maze
-        } catch _ {
-            return nil
+protocol MazeObserver {
+    func identifier() -> String
+    func currentMazeDidChange(newMaze: Maze?)
+}
+
+class MazeHandler {
+    static let sharedInstance = MazeHandler()
+    
+    var currentMaze: Maze? = nil
+    
+    var mazeObservers = [MazeObserver]()
+    
+    func readMaze(fromFilename filename: String, type: String) -> Maze? {
+        if let path = Bundle.main.path(forResource: filename, ofType: type) {
+            do {
+                let text = try String(contentsOfFile: path, encoding: String.Encoding.utf8)
+                currentMaze = try Maze.deserialize(mazeFile: text)
+                return currentMaze
+            } catch _ {
+                return nil
+            }
+        }
+        
+        return nil
+    }
+    
+    typealias MazeCompletion = (Maze?) -> ()
+    
+    func generateMaze(width: Int, height: Int, completion: MazeCompletion?) {
+        let serverURL = "http://52.34.211.66:9000/"
+        let generateURL = serverURL + "generate/"
+        let queryURL = generateURL + String(format: "?d=%d&w=%d", height, width)
+        Alamofire.request(queryURL).response { response in
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                do {
+                    self.currentMaze = try Maze.deserialize(mazeFile: utf8Text)
+                    completion?(self.currentMaze)
+                    self.notifyObserversOfNewMaze()
+                } catch let mazeError {
+                    print(mazeError)
+                    completion?(nil)
+                }
+            } else {
+                completion?(nil)
+            }
         }
     }
     
-    return nil
-}
-
-
-func generateMaze(width: Int, height: Int, completion: @escaping ((Maze?) -> Void)) {
-    let serverURL = "http://52.34.211.66:9000/"
-    let generateURL = serverURL + "generate/"
-    let queryURL = generateURL + String(format: "?d=%d&w=%d", height, width)
-    Alamofire.request(queryURL).response { response in
-        if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-            do {
-                let maze = try Maze.deserialize(mazeFile: utf8Text)
-                completion(maze)
-            } catch _ {
-                completion(nil)
+    func addObserver(observer: MazeObserver) {
+        if !containsObserver(array: mazeObservers, observer: observer) {
+            mazeObservers.append(observer)
+        }
+    }
+    
+    func removeObserver(observer: MazeObserver) {
+        for (idx, anObserver) in mazeObservers.enumerated() {
+            if anObserver.identifier() == observer.identifier() {
+                mazeObservers.remove(at: idx)
+                return
             }
-        } else {
-            completion(nil)
+        }
+    }
+    
+    func containsObserver(array: [MazeObserver], observer: MazeObserver) -> Bool {
+        for anObserver in array {
+            if observer.identifier() == anObserver.identifier() {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func notifyObserversOfNewMaze() {
+        for observer in mazeObservers {
+            observer.currentMazeDidChange(newMaze: currentMaze)
         }
     }
 }
+
+
+

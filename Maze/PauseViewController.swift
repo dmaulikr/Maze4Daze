@@ -9,7 +9,18 @@
 import UIKit
 
 class PauseViewController: UIViewController {
-
+    
+    @IBOutlet var widthSlider: UISlider?
+    @IBOutlet var heightSlider: UISlider?
+    
+    @IBOutlet var widthLabel: UILabel?
+    @IBOutlet var heightLabel: UILabel?
+    
+    @IBOutlet var activityIndiactor: UIActivityIndicatorView?
+    
+    var mazeWidth = 20
+    var mazeHeight = 20
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,6 +29,14 @@ class PauseViewController: UIViewController {
         view.backgroundColor = UIColor.white
         
         addResumeGesture()
+        
+        if let currentMaze = MazeHandler.sharedInstance.currentMaze {
+            mazeWidth = currentMaze.width
+            mazeHeight = currentMaze.height
+        }
+        
+        updateLabels()
+        updateSliders()
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,8 +53,39 @@ class PauseViewController: UIViewController {
         view.addGestureRecognizer(resumeGesture)
     }
     
-    func resume() {
+    @IBAction func resume() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func getNewMaze() {
+        activityIndiactor?.startAnimating()
+        MazeHandler.sharedInstance.generateMaze(width: mazeWidth, height: mazeHeight, completion: {
+            _ in
+            DispatchQueue.main.async {
+                self.activityIndiactor?.stopAnimating()
+            }
+        })
+    }
+    
+    @IBAction func sliderChanged(slider: UISlider) {
+        if slider == widthSlider {
+            mazeWidth = Int(slider.value)
+        }
+        if slider == heightSlider {
+            mazeHeight = Int(slider.value)
+        }
+        
+        updateLabels()
+    }
+    
+    func updateLabels() {
+        widthLabel?.text = String(format: "%d", mazeWidth)
+        heightLabel?.text = String(format: "%d", mazeHeight)
+    }
+    
+    func updateSliders() {
+        widthSlider?.value = Float(mazeWidth)
+        heightSlider?.value = Float(mazeHeight)
     }
 
     /*

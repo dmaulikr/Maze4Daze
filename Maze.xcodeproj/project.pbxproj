@@ -85,7 +85,6 @@
 				20B23D111DD664D700ED445A /* Assets.xcassets */,
 				20B23D131DD664D700ED445A /* LaunchScreen.storyboard */,
 				20B23D161DD664D700ED445A /* Info.plist */,
-				20B23D241DDBD50200ED445A /* MazeFetcher.swift */,
 			);
 			path = Maze;
 			sourceTree = "<group>";
@@ -93,6 +92,7 @@
 		20B23D1C1DDBCA5600ED445A /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				20B23D241DDBD50200ED445A /* MazeFetcher.swift */,
 				20B23D1D1DDBCA6D00ED445A /* Maze.swift */,
 			);
 			name = Logic;
@@ -242,7 +242,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
