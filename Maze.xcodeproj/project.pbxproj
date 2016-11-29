@@ -10,6 +10,7 @@
 		203917B81DE39115008994AF /* PrintManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203917B71DE39115008994AF /* PrintManager.swift */; };
 		203917BB1DE3A3B7008994AF /* maze_rsa.privKey in Resources */ = {isa = PBXBuildFile; fileRef = 203917BA1DE3A3B7008994AF /* maze_rsa.privKey */; };
 		2054502D1DECF2A8005CD7F8 /* TestSTL.stl in Resources */ = {isa = PBXBuildFile; fileRef = 2054502C1DECF2A8005CD7F8 /* TestSTL.stl */; };
+		2054502F1DED4B52005CD7F8 /* iPadMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2054502E1DED4B52005CD7F8 /* iPadMain.storyboard */; };
 		20B23D051DD664D700ED445A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B23D041DD664D700ED445A /* AppDelegate.swift */; };
 		20B23D0B1DD664D700ED445A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B23D0A1DD664D700ED445A /* GameScene.swift */; };
 		20B23D0D1DD664D700ED445A /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B23D0C1DD664D700ED445A /* GameViewController.swift */; };
@@ -29,6 +30,7 @@
 		203917B71DE39115008994AF /* PrintManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintManager.swift; sourceTree = "<group>"; };
 		203917BA1DE3A3B7008994AF /* maze_rsa.privKey */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = maze_rsa.privKey; sourceTree = "<group>"; };
 		2054502C1DECF2A8005CD7F8 /* TestSTL.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestSTL.stl; sourceTree = "<group>"; };
+		2054502E1DED4B52005CD7F8 /* iPadMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPadMain.storyboard; sourceTree = "<group>"; };
 		20B23D011DD664D700ED445A /* Maze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20B23D041DD664D700ED445A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		20B23D0A1DD664D700ED445A /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				20B23D0C1DD664D700ED445A /* GameViewController.swift */,
 				20B23D2E1DDC2B7100ED445A /* PauseViewController.swift */,
 				20B23D0E1DD664D700ED445A /* Main.storyboard */,
+				2054502E1DED4B52005CD7F8 /* iPadMain.storyboard */,
 				20B23D111DD664D700ED445A /* Assets.xcassets */,
 				20B23D131DD664D700ED445A /* LaunchScreen.storyboard */,
 				20B23D161DD664D700ED445A /* Info.plist */,
@@ -220,6 +223,7 @@
 				20B23D211DDBD4C800ED445A /* first.maze in Resources */,
 				20B23D121DD664D700ED445A /* Assets.xcassets in Resources */,
 				20B23D151DD664D700ED445A /* LaunchScreen.storyboard in Resources */,
+				2054502F1DED4B52005CD7F8 /* iPadMain.storyboard in Resources */,
 				203917BB1DE3A3B7008994AF /* maze_rsa.privKey in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

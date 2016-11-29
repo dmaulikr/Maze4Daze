@@ -70,7 +70,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate, MazeObserver {
     
     func pause() {
         if let gameVC = view?.window?.rootViewController as? GameViewController {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            var storyboardName = "Main"
+            switch UIDevice.current.userInterfaceIdiom {
+            case .pad:
+                storyboardName = "iPadMain"
+            default:
+                break
+            }
+            let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
             if let pauseViewController = storyboard.instantiateViewController(withIdentifier: "PauseVC") as? PauseViewController {
                 gameVC.present(pauseViewController, animated: true, completion: nil)
             }
