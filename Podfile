@@ -10,5 +10,6 @@ target 'Maze' do
     :git => 'https://github.com/Alamofire/Alamofire.git',
     :branch => ‘master’
   # pod 'SnapKit'
+  pod 'SwiftyRSA'
 
 end

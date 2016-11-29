@@ -16,6 +16,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        /*
+         // Test key exchange
+        PrintManager.sharedInstance.performHandshake {
+            if PrintManager.sharedInstance.verified {
+                let path = Bundle.main.path(forResource: "TestSTL", ofType: "stl")!
+                let text = try! String(contentsOfFile: path, encoding: String.Encoding.utf8)
+                try! PrintManager.sharedInstance.storeSTLFile(stlText: text)
+                try! PrintManager.sharedInstance.uploadSTLFile()
+            }
+        }
+ */
+        
+        /*
+        // Test upload and print
+        PrintManager.sharedInstance.useAPIKey()
+        let path = Bundle.main.path(forResource: "TestSTL", ofType: "stl")!
+        let text = try! String(contentsOfFile: path, encoding: String.Encoding.utf8)
+        try! PrintManager.sharedInstance.storeSTLFile(stlText: text)
+        try! PrintManager.sharedInstance.uploadSTLFile()
+        try! PrintManager.sharedInstance.printUploadedSTLFile()
+ */
+        
         return true
     }
 

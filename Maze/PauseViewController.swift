@@ -92,6 +92,27 @@ class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         widthSlider?.value = Float(mazeWidth)
         heightSlider?.value = Float(mazeHeight)
     }
+    
+    
+    @IBAction func sendPrintRequest() {
+        // Make request for STL file
+        // Send STL file to printer
+        
+        do {
+            try PrintManager.sharedInstance.uploadSTLFile {
+                success in
+                if success {
+                    do {
+                        try PrintManager.sharedInstance.printUploadedSTLFile()
+                    } catch let error {
+                        print("Error printing: ", error)
+                    }
+                }
+            }
+        } catch let error {
+            print("Error uploading: ", error)
+        }
+    }
 
     /*
     // MARK: - Navigation

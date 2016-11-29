@@ -1,8 +1,10 @@
 PODS:
   - Alamofire (4.1.0)
+  - SwiftyRSA (0.5.0)
 
 DEPENDENCIES:
   - Alamofire (from `https://github.com/Alamofire/Alamofire.git`, branch `master`)
+  - SwiftyRSA
 
 EXTERNAL SOURCES:
   Alamofire:
@@ -16,7 +18,8 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: e266cf991b933498df791e645e0d8ac294492153
+  SwiftyRSA: e73c44402451ad74c603cc87f7cd8a6d6f418138
 
-PODFILE CHECKSUM: 2244da3225e3abb6a32eed9466b81dd39eb392d3
+PODFILE CHECKSUM: 40c633d683b65004aa642e36e88ad901b0f08a34
 
 COCOAPODS: 1.2.0.beta.1

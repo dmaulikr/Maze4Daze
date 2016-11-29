@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		203917B81DE39115008994AF /* PrintManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203917B71DE39115008994AF /* PrintManager.swift */; };
+		203917BB1DE3A3B7008994AF /* maze_rsa.privKey in Resources */ = {isa = PBXBuildFile; fileRef = 203917BA1DE3A3B7008994AF /* maze_rsa.privKey */; };
+		2054502D1DECF2A8005CD7F8 /* TestSTL.stl in Resources */ = {isa = PBXBuildFile; fileRef = 2054502C1DECF2A8005CD7F8 /* TestSTL.stl */; };
 		20B23D051DD664D700ED445A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B23D041DD664D700ED445A /* AppDelegate.swift */; };
 		20B23D0B1DD664D700ED445A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B23D0A1DD664D700ED445A /* GameScene.swift */; };
 		20B23D0D1DD664D700ED445A /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B23D0C1DD664D700ED445A /* GameViewController.swift */; };
@@ -23,6 +26,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		203917B71DE39115008994AF /* PrintManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintManager.swift; sourceTree = "<group>"; };
+		203917BA1DE3A3B7008994AF /* maze_rsa.privKey */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = maze_rsa.privKey; sourceTree = "<group>"; };
+		2054502C1DECF2A8005CD7F8 /* TestSTL.stl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestSTL.stl; sourceTree = "<group>"; };
 		20B23D011DD664D700ED445A /* Maze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20B23D041DD664D700ED445A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		20B23D0A1DD664D700ED445A /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -54,6 +60,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		203917B91DE3A3AC008994AF /* Keys */ = {
+			isa = PBXGroup;
+			children = (
+				203917BA1DE3A3B7008994AF /* maze_rsa.privKey */,
+			);
+			name = Keys;
+			sourceTree = "<group>";
+		};
 		20B23CF81DD664D700ED445A = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +89,8 @@
 		20B23D031DD664D700ED445A /* Maze */ = {
 			isa = PBXGroup;
 			children = (
+				203917B91DE3A3AC008994AF /* Keys */,
+				20B6BCC11DE390F600525B87 /* Printing */,
 				20B23D1F1DDBD4B000ED445A /* TestMazes */,
 				20B23D1C1DDBCA5600ED445A /* Logic */,
 				20B23D041DD664D700ED445A /* AppDelegate.swift */,
@@ -104,8 +120,17 @@
 				20B23D281DDBDB8100ED445A /* small.maze */,
 				20B23D201DDBD4C800ED445A /* first.maze */,
 				20B23D261DDBDB1E00ED445A /* second.maze */,
+				2054502C1DECF2A8005CD7F8 /* TestSTL.stl */,
 			);
 			name = TestMazes;
+			sourceTree = "<group>";
+		};
+		20B6BCC11DE390F600525B87 /* Printing */ = {
+			isa = PBXGroup;
+			children = (
+				203917B71DE39115008994AF /* PrintManager.swift */,
+			);
+			name = Printing;
 			sourceTree = "<group>";
 		};
 		7D0C8BF1FDF9227E471319F7 /* Frameworks */ = {
@@ -190,10 +215,12 @@
 			files = (
 				20B23D271DDBDB1E00ED445A /* second.maze in Resources */,
 				20B23D101DD664D700ED445A /* Main.storyboard in Resources */,
+				2054502D1DECF2A8005CD7F8 /* TestSTL.stl in Resources */,
 				20B23D291DDBDB8100ED445A /* small.maze in Resources */,
 				20B23D211DDBD4C800ED445A /* first.maze in Resources */,
 				20B23D121DD664D700ED445A /* Assets.xcassets in Resources */,
 				20B23D151DD664D700ED445A /* LaunchScreen.storyboard in Resources */,
+				203917BB1DE3A3B7008994AF /* maze_rsa.privKey in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +283,7 @@
 				20B23D0D1DD664D700ED445A /* GameViewController.swift in Sources */,
 				20B23D1E1DDBCA6D00ED445A /* Maze.swift in Sources */,
 				20B23D251DDBD50200ED445A /* MazeFetcher.swift in Sources */,
+				203917B81DE39115008994AF /* PrintManager.swift in Sources */,
 				20B23D051DD664D700ED445A /* AppDelegate.swift in Sources */,
 				20B23D2F1DDC2B7100ED445A /* PauseViewController.swift in Sources */,
 			);

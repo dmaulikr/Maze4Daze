@@ -23,6 +23,13 @@ enum MazeError : Error {
     case BadWidth(line: Int)
 }
 
+enum Corner {
+    case topLeft
+    case topRight
+    case bottomLeft
+    case bottomRight
+}
+
 struct Tile {
     let position: (Int, Int)
     
@@ -31,6 +38,8 @@ struct Tile {
     let bottomWall: Bool
     let rightWall: Bool
     
+    let corners: [Corner]
+    
     init(position: (Int, Int), topWall: Bool, leftWall: Bool, bottomWall: Bool, rightWall: Bool) {
         self.position = position
         
@@ -38,6 +47,21 @@ struct Tile {
         self.leftWall = leftWall
         self.bottomWall = bottomWall
         self.rightWall = rightWall
+        
+        var theCorners = [Corner]()
+        if topWall && leftWall {
+            theCorners.append(.topLeft)
+        }
+        if topWall && rightWall {
+            theCorners.append(.topRight)
+        }
+        if bottomWall && leftWall {
+            theCorners.append(.bottomLeft)
+        }
+        if bottomWall && rightWall {
+            theCorners.append(.bottomRight)
+        }
+        self.corners = theCorners
     }
     
     init(position: (Int, Int), walls: Int) {
