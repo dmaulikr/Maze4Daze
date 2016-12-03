@@ -77,17 +77,26 @@ struct Maze {
     
     let tiles: [Tile]
     
+    let raw: String
+    
     var name: String?
     
-    init(width: Int, height: Int, tiles: [Tile]) {
+    let uuid: String
+    var stlDownloaded: Bool = false
+    
+    init(width: Int, height: Int, tiles: [Tile], raw: String) {
         self.width = width
         self.height = height
         
         self.tiles = tiles
+        
+        self.raw = raw
+        
+        self.uuid = UUID().uuidString
     }
     
     static var empty: Maze {
-        return Maze(width: 0, height: 0, tiles: [])
+        return Maze(width: 0, height: 0, tiles: [], raw: "")
     }
     
     static func deserialize(mazeFile: String) throws -> Maze {
@@ -119,6 +128,10 @@ struct Maze {
             }
         }
         
-        return Maze(width: width, height: height, tiles: tiles)
+        return Maze(width: width, height: height, tiles: tiles, raw: mazeFile)
     }
+}
+
+func ==(lhs: Maze, rhs: Maze) -> Bool {
+    return lhs.uuid == rhs.uuid
 }

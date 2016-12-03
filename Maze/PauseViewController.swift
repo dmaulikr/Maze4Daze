@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, MazeObserver {
     
     @IBOutlet var widthSlider: UISlider?
     @IBOutlet var heightSlider: UISlider?
@@ -17,6 +17,7 @@ class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet var heightLabel: UILabel?
     
     @IBOutlet var activityIndiactor: UIActivityIndicatorView?
+    @IBOutlet var printButton: UIButton?
     
     @IBOutlet var mazePicker: UIPickerView?
     var sampleMazes = ["small", "first", "second"]
@@ -38,14 +39,21 @@ class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             mazeHeight = currentMaze.height
         }
         
+        MazeHandler.sharedInstance.addObserver(observer: self)
+        
         updateLabels()
         updateSliders()
         updatePicker()
+        updatePrintButton()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    deinit {
+        MazeHandler.sharedInstance.removeObserver(observer: self)
     }
     
     
@@ -64,7 +72,7 @@ class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBAction func getNewMaze() {
         activityIndiactor?.startAnimating()
         MazeHandler.sharedInstance.generateMaze(width: mazeWidth, height: mazeHeight, completion: {
-            _ in
+            maze in
             DispatchQueue.main.async {
                 self.activityIndiactor?.stopAnimating()
                 self.updatePicker()
@@ -91,6 +99,14 @@ class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     func updateSliders() {
         widthSlider?.value = Float(mazeWidth)
         heightSlider?.value = Float(mazeHeight)
+    }
+    
+    func updatePrintButton() {
+        if let currentMaze = MazeHandler.sharedInstance.currentMaze {
+            printButton?.isEnabled = currentMaze.stlDownloaded
+        } else {
+            printButton?.isEnabled = false
+        }
     }
     
     
@@ -160,6 +176,21 @@ class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
         updateLabels()
         updateSliders()
+    }
+    
+    
+    // MARK: - MazeObserver
+    
+    func identifier() -> String {
+        return "PauseViewController"
+    }
+    
+    func currentMazeGotSTLFile() {
+        updatePrintButton()
+    }
+    
+    func currentMazeDidChange(newMaze: Maze?) {
+        updatePrintButton()
     }
 
 }

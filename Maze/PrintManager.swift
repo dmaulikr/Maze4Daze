@@ -52,6 +52,24 @@ class PrintManager {
         }
     }
     
+    func storeSTLFile(stlData: Data) throws {
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let path = dir.appendingPathComponent(currentSTLFilename)
+            try stlData.write(to: path)
+        } else {
+            throw FileError.CouldNotLocateDocumentsDirectory
+        }
+    }
+    
+    func clearSTLFile() throws {
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let path = dir.appendingPathComponent(currentSTLFilename)
+            try FileManager.default.removeItem(at: path)
+        } else {
+            throw FileError.CouldNotLocateDocumentsDirectory
+        }
+    }
+    
     func doesFileExistInDocDir(filename: String) -> Bool {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let url = NSURL(fileURLWithPath: path)

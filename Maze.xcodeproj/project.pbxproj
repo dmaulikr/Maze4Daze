@@ -93,7 +93,7 @@
 			children = (
 				203917B91DE3A3AC008994AF /* Keys */,
 				20B6BCC11DE390F600525B87 /* Printing */,
-				20B23D1F1DDBD4B000ED445A /* TestMazes */,
+				20B23D1F1DDBD4B000ED445A /* TestFiles */,
 				20B23D1C1DDBCA5600ED445A /* Logic */,
 				20B23D041DD664D700ED445A /* AppDelegate.swift */,
 				20B23D0A1DD664D700ED445A /* GameScene.swift */,
@@ -117,7 +117,7 @@
 			name = Logic;
 			sourceTree = "<group>";
 		};
-		20B23D1F1DDBD4B000ED445A /* TestMazes */ = {
+		20B23D1F1DDBD4B000ED445A /* TestFiles */ = {
 			isa = PBXGroup;
 			children = (
 				20B23D281DDBDB8100ED445A /* small.maze */,
@@ -125,7 +125,7 @@
 				20B23D261DDBDB1E00ED445A /* second.maze */,
 				2054502C1DECF2A8005CD7F8 /* TestSTL.stl */,
 			);
-			name = TestMazes;
+			name = TestFiles;
 			sourceTree = "<group>";
 		};
 		20B6BCC11DE390F600525B87 /* Printing */ = {

@@ -151,6 +151,7 @@
                         <outlet property="heightLabel" destination="K8J-ew-kZR" id="0Zd-rj-xJj"/>
                         <outlet property="heightSlider" destination="nDL-BK-AMn" id="BeQ-Gg-T6G"/>
                         <outlet property="mazePicker" destination="4Uq-nl-SSp" id="Ev4-LY-2sO"/>
+                        <outlet property="printButton" destination="9Sb-br-whd" id="0Cv-dE-yAG"/>
                         <outlet property="widthLabel" destination="Pkt-Jc-1hd" id="vBm-Pt-kiG"/>
                         <outlet property="widthSlider" destination="iYG-cs-aWS" id="pF5-mZ-fV3"/>
                     </connections>
