@@ -23,6 +23,7 @@ To print the current maze, tap the `Print` button on the pause menu. If this but
 
 - The OctoPrint API key is hard-coded. Although I wrote code for the OctoPrint handshake to obtain a session key, I have been unable to get it to work so far. (It seems to be an internal OctoPrint server error.)
   * The handshake code expects a file called maze_rsa.privKey. I have omitted it from the repository.
+- Since error responses from OctoPrint are somtimes strings (instead of JSON), the app may report the wrong error, or no error at all.
 
 ## Code Structure
 
