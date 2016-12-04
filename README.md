@@ -21,7 +21,6 @@ To print the current maze, tap the `Print` button on the pause menu. If this but
 
 ## Bugs
 
-- The OctoPrint IP address is hard-coded. I'm investigating using octopi.local for bonjour-compatible networks.
 - The OctoPrint API key is hard-coded. Although I wrote code for the OctoPrint handshake to obtain a session key, I have been unable to get it to work so far. (It seems to be an internal OctoPrint server error.)
   * The handshake code expects a file called maze_rsa.privKey. I have omitted it from the repository.
 

@@ -27,7 +27,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, MazeObserver {
             }
         } */
         
-        MazeHandler.sharedInstance.generateMaze(width: 20, height: 20, completion: {
+        MazeHandler.sharedInstance.generateMaze(width: 3, height: 3, completion: {
             maze, error in
             if let maze = maze {
                 self.addMaze(maze: maze)

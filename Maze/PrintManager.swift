@@ -32,7 +32,7 @@ class PrintManager {
     private let appid = "io.evanb.amazeing"
     private let appversion = "1.0"
     
-    static private let baseURL = "http://192.168.0.139/"
+    static private let baseURL = "http://octopi.local/"
     static private let authRoute = baseURL + "apps/auth"
     
     private let currentSTLFilename = "aMAZEing-maze-file.stl"
@@ -105,7 +105,11 @@ class PrintManager {
                                 if let json = response.result.value {
                                     print(json)
                                 }
-                                completion?(true, nil)
+                                if response.result.isFailure {
+                                    completion?(false, response.result.error)
+                                } else {
+                                    completion?(true, nil)
+                                }
                             }
                         case .failure(let encodingError):
                             completion?(false, encodingError)
@@ -133,10 +137,8 @@ class PrintManager {
                         print(value)
                     }
                     completion?(true, nil)
-                    break
                 case .failure(_):
                     completion?(false, response.result.error)
-                    break
                 }
             }
         } else {

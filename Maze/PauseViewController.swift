@@ -122,7 +122,12 @@ class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 success, error in
                 if success {
                     do {
-                        try PrintManager.sharedInstance.printUploadedSTLFile()
+                        try PrintManager.sharedInstance.printUploadedSTLFile() {
+                            _, error in
+                            if let error = error {
+                                ErrorHandler.showError(error: error, onViewController: self)
+                            }
+                        }
                     } catch let error {
                         ErrorHandler.showError(error: error, onViewController: self)
                     }

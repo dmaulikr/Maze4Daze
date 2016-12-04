@@ -39,6 +39,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         try! PrintManager.sharedInstance.printUploadedSTLFile()
  */
         
+        // Use API key
+        PrintManager.sharedInstance.useAPIKey()
+        
+        
         return true
     }
 
