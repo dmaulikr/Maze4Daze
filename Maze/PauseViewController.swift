@@ -20,7 +20,7 @@ class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet var printButton: UIButton?
     
     @IBOutlet var mazePicker: UIPickerView?
-    var sampleMazes = ["small", "first", "second"]
+    var sampleMazes = ["small", "medium", "large"]
     
     var mazeWidth = 20
     var mazeHeight = 20
@@ -106,9 +106,13 @@ class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     func updatePrintButton() {
         if let currentMaze = MazeHandler.sharedInstance.currentMaze {
-            printButton?.isEnabled = currentMaze.stlDownloaded
+            DispatchQueue.main.async {
+                self.printButton?.isEnabled = currentMaze.stlDownloaded
+            }
         } else {
-            printButton?.isEnabled = false
+            DispatchQueue.main.async {
+                self.printButton?.isEnabled = false
+            }
         }
     }
     

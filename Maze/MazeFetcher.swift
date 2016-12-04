@@ -57,7 +57,7 @@ class MazeHandler {
         let generateURL = MazeHandler.serverURL + "generate/"
         let queryURL = generateURL + String(format: "?d=%d&w=%d", height, width)
         Alamofire.request(queryURL).response { response in
-            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+            if let data = response.data, data.count > 0, let utf8Text = String(data: data, encoding: .utf8) {
                 do {
                     self.currentMaze = try Maze.deserialize(mazeFile: utf8Text)
                     self.currentMaze?.name = nil
@@ -85,12 +85,13 @@ class MazeHandler {
             try PrintManager.sharedInstance.clearSTLFile()
         } catch let error {
             completion?(false, error)
+            return
         }
         let stlURL = MazeHandler.serverURL + "stl"
-        let parameters: [String: Any] = ["maze": maze.raw, "marble": 5]
+        let parameters: [String: Any] = ["maze": maze.raw, "marble": maze.marbleSize]
         Alamofire.request(stlURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).response { response in
             if let currentMaze = self.currentMaze, currentMaze == maze {
-                if let data = response.data {
+                if let data = response.data, data.count > 0 {
                     do {
                         try PrintManager.sharedInstance.storeSTLFile(stlData: data)
                         self.currentMaze?.stlDownloaded = true

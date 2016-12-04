@@ -19,9 +19,9 @@
 		20B23D121DD664D700ED445A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20B23D111DD664D700ED445A /* Assets.xcassets */; };
 		20B23D151DD664D700ED445A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20B23D131DD664D700ED445A /* LaunchScreen.storyboard */; };
 		20B23D1E1DDBCA6D00ED445A /* Maze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B23D1D1DDBCA6D00ED445A /* Maze.swift */; };
-		20B23D211DDBD4C800ED445A /* first.maze in Resources */ = {isa = PBXBuildFile; fileRef = 20B23D201DDBD4C800ED445A /* first.maze */; };
+		20B23D211DDBD4C800ED445A /* large.maze in Resources */ = {isa = PBXBuildFile; fileRef = 20B23D201DDBD4C800ED445A /* large.maze */; };
 		20B23D251DDBD50200ED445A /* MazeFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B23D241DDBD50200ED445A /* MazeFetcher.swift */; };
-		20B23D271DDBDB1E00ED445A /* second.maze in Resources */ = {isa = PBXBuildFile; fileRef = 20B23D261DDBDB1E00ED445A /* second.maze */; };
+		20B23D271DDBDB1E00ED445A /* medium.maze in Resources */ = {isa = PBXBuildFile; fileRef = 20B23D261DDBDB1E00ED445A /* medium.maze */; };
 		20B23D291DDBDB8100ED445A /* small.maze in Resources */ = {isa = PBXBuildFile; fileRef = 20B23D281DDBDB8100ED445A /* small.maze */; };
 		20B23D2F1DDC2B7100ED445A /* PauseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B23D2E1DDC2B7100ED445A /* PauseViewController.swift */; };
 		9D31EFA282D887CAFA97E9E7 /* Pods_Maze.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F128D3357ED818A163183923 /* Pods_Maze.framework */; };
@@ -42,9 +42,9 @@
 		20B23D141DD664D700ED445A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		20B23D161DD664D700ED445A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20B23D1D1DDBCA6D00ED445A /* Maze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Maze.swift; sourceTree = "<group>"; };
-		20B23D201DDBD4C800ED445A /* first.maze */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = first.maze; sourceTree = "<group>"; };
+		20B23D201DDBD4C800ED445A /* large.maze */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = large.maze; sourceTree = "<group>"; };
 		20B23D241DDBD50200ED445A /* MazeFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MazeFetcher.swift; sourceTree = "<group>"; };
-		20B23D261DDBDB1E00ED445A /* second.maze */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = second.maze; sourceTree = "<group>"; };
+		20B23D261DDBDB1E00ED445A /* medium.maze */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = medium.maze; sourceTree = "<group>"; };
 		20B23D281DDBDB8100ED445A /* small.maze */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = small.maze; sourceTree = "<group>"; };
 		20B23D2E1DDC2B7100ED445A /* PauseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseViewController.swift; sourceTree = "<group>"; };
 		3464C57BC96EAABA25B294BD /* Pods-Maze.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maze.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Maze/Pods-Maze.debug.xcconfig"; sourceTree = "<group>"; };
@@ -124,8 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				20B23D281DDBDB8100ED445A /* small.maze */,
-				20B23D201DDBD4C800ED445A /* first.maze */,
-				20B23D261DDBDB1E00ED445A /* second.maze */,
+				20B23D201DDBD4C800ED445A /* large.maze */,
+				20B23D261DDBDB1E00ED445A /* medium.maze */,
 				2054502C1DECF2A8005CD7F8 /* TestSTL.stl */,
 			);
 			name = TestFiles;
@@ -219,11 +219,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20B23D271DDBDB1E00ED445A /* second.maze in Resources */,
+				20B23D271DDBDB1E00ED445A /* medium.maze in Resources */,
 				20B23D101DD664D700ED445A /* Main.storyboard in Resources */,
 				2054502D1DECF2A8005CD7F8 /* TestSTL.stl in Resources */,
 				20B23D291DDBDB8100ED445A /* small.maze in Resources */,
-				20B23D211DDBD4C800ED445A /* first.maze in Resources */,
+				20B23D211DDBD4C800ED445A /* large.maze in Resources */,
 				20B23D121DD664D700ED445A /* Assets.xcassets in Resources */,
 				20B23D151DD664D700ED445A /* LaunchScreen.storyboard in Resources */,
 				2054502F1DED4B52005CD7F8 /* iPadMain.storyboard in Resources */,

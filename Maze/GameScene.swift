@@ -17,16 +17,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate, MazeObserver {
     let motionManager = CMMotionManager()
     
     override func didMove(to view: SKView) {
-        /* readMaze(fromFilename: "first", type: "maze") {
+        MazeHandler.sharedInstance.readMaze(fromFilename: "medium", type: "maze") {
             maze, error in
             if let maze = maze {
-                addMaze(maze: maze)
+                self.addMaze(maze: maze)
+                self.resetMarble()
             }
             if let error = error, let rootViewController = self.view?.window?.rootViewController {
                  ErrorHandler.showError(error: error, onViewController: rootViewController)
             }
-        } */
+        }
         
+        /*
         MazeHandler.sharedInstance.generateMaze(width: 20, height: 20, completion: {
             maze, error in
             if let maze = maze {
@@ -37,8 +39,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, MazeObserver {
                 ErrorHandler.showError(error: error, onViewController: rootViewController)
             }
         })
-        
-        //addScreenBorderWalls()
+ */
         
         backgroundColor = SKColor.white
         

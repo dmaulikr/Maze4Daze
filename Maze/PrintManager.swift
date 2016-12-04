@@ -63,11 +63,13 @@ class PrintManager {
     }
     
     func clearSTLFile() throws {
-        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            let path = dir.appendingPathComponent(currentSTLFilename)
-            try FileManager.default.removeItem(at: path)
-        } else {
-            throw FileError.CouldNotLocateDocumentsDirectory
+        if doesFileExistInDocDir(filename: currentSTLFilename) {
+            if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                let path = dir.appendingPathComponent(currentSTLFilename)
+                try FileManager.default.removeItem(at: path)
+            } else {
+                throw FileError.CouldNotLocateDocumentsDirectory
+            }
         }
     }
     
