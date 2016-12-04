@@ -20,6 +20,11 @@ extension MazeObserver {
     func currentMazeGotSTLFile() { }
 }
 
+enum DataError: Error {
+    case UTF8Serialization
+    case HTTPResponse
+}
+
 class MazeHandler {
     static let sharedInstance = MazeHandler()
     
@@ -29,26 +34,26 @@ class MazeHandler {
     
     private static let serverURL = "http://52.34.211.66:9000/"
     
-    func readMaze(fromFilename filename: String, type: String) -> Maze? {
+    typealias MazeCompletion = (Maze?, Error?) -> ()
+    typealias SuccessCompletion = (Bool, Error?) -> ()
+    
+    func readMaze(fromFilename filename: String, type: String, completion: MazeCompletion? = nil) {
         if let path = Bundle.main.path(forResource: filename, ofType: type) {
             do {
                 let text = try String(contentsOfFile: path, encoding: String.Encoding.utf8)
                 currentMaze = try Maze.deserialize(mazeFile: text)
                 currentMaze?.name = filename
                 self.notifyObserversOfNewMaze()
-                return currentMaze
-            } catch _ {
-                return nil
+                completion?(currentMaze, nil)
+            } catch let error {
+                completion?(nil, error)
             }
+        } else {
+            completion?(nil, FileError.CouldNotLoadMainBundle)
         }
-        
-        return nil
     }
     
-    typealias MazeCompletion = (Maze?) -> ()
-    typealias SuccessCompletion = (Bool) -> ()
-    
-    func generateMaze(width: Int, height: Int, completion: MazeCompletion?) {
+    func generateMaze(width: Int, height: Int, completion: MazeCompletion? = nil) {
         let generateURL = MazeHandler.serverURL + "generate/"
         let queryURL = generateURL + String(format: "?d=%d&w=%d", height, width)
         Alamofire.request(queryURL).response { response in
@@ -56,17 +61,21 @@ class MazeHandler {
                 do {
                     self.currentMaze = try Maze.deserialize(mazeFile: utf8Text)
                     self.currentMaze?.name = nil
-                    completion?(self.currentMaze)
+                    completion?(self.currentMaze, nil)
                     if let maze = self.currentMaze {
-                        self.fetchSTL(maze: maze)
+                        self.fetchSTL(maze: maze) {
+                            _, error in
+                            if let error = error {
+                                ErrorHandler.showErrorOnRootViewController(error: error)
+                            }
+                        }
                     }
                     self.notifyObserversOfNewMaze()
                 } catch let mazeError {
-                    print(mazeError)
-                    completion?(nil)
+                    completion?(nil, mazeError)
                 }
             } else {
-                completion?(nil)
+                completion?(nil, DataError.UTF8Serialization)
             }
         }
     }
@@ -75,8 +84,7 @@ class MazeHandler {
         do {
             try PrintManager.sharedInstance.clearSTLFile()
         } catch let error {
-            print("Error clearing STL file: ", error)
-            completion?(false)
+            completion?(false, error)
         }
         let stlURL = MazeHandler.serverURL + "stl"
         let parameters: [String: Any] = ["maze": maze.raw, "marble": 5]
@@ -87,13 +95,12 @@ class MazeHandler {
                         try PrintManager.sharedInstance.storeSTLFile(stlData: data)
                         self.currentMaze?.stlDownloaded = true
                         self.notifyObserversOfNewSTL()
-                        completion?(true)
+                        completion?(true, nil)
                     } catch let error {
-                        print("Error storing STL: ", error)
-                        completion?(false)
+                        completion?(false, error)
                     }
                 } else {
-                    completion?(false)
+                    completion?(false, DataError.HTTPResponse)
                 }
             }
         }

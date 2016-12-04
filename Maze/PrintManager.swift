@@ -17,6 +17,7 @@ enum KeyError: Error {
 enum FileError: Error {
     case CouldNotLocateDocumentsDirectory
     case NoSTLFileSaved
+    case CouldNotLoadMainBundle
 }
 
 enum SessionError: Error {
@@ -41,7 +42,7 @@ class PrintManager {
     
     var verified = false
     
-    typealias SuccessCompletion = (Bool) -> ()
+    typealias SuccessCompletion = (Bool, Error?) -> ()
     
     func storeSTLFile(stlText: String) throws {
         if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
@@ -104,12 +105,10 @@ class PrintManager {
                                 if let json = response.result.value {
                                     print(json)
                                 }
-                                completion?(true)
+                                completion?(true, nil)
                             }
                         case .failure(let encodingError):
-                            print("ENCODING FAILURE")
-                            print(encodingError)
-                            completion?(false)
+                            completion?(false, encodingError)
                         }
                 }
                 )
@@ -133,11 +132,10 @@ class PrintManager {
                     if let value = response.result.value{
                         print(value)
                     }
-                    completion?(true)
+                    completion?(true, nil)
                     break
                 case .failure(_):
-                    print(response.result.error)
-                    completion?(false)
+                    completion?(false, response.result.error)
                     break
                 }
             }
@@ -152,6 +150,13 @@ class PrintManager {
         verified = true
         validUntil = Date(timeIntervalSinceNow: 60 * 60 * 24 * 7 * 4)
     }
+    
+    
+    
+    // MARK: - OctoPrint Handshake
+    
+    // NOTE: This code currently doesn't work, possibly because of a problem with the OctoPrint server.
+    // TODO: Use ErrorHandler instead of printing errors
     
     func readPrivateKey(filename: String) throws -> String {
         if let path = Bundle.main.path(forResource: filename, ofType: "privKey") {

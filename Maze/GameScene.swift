@@ -17,15 +17,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate, MazeObserver {
     let motionManager = CMMotionManager()
     
     override func didMove(to view: SKView) {
-        /* if let maze = readMaze(fromFilename: "first", type: "maze") {
-            addMaze(maze: maze)
+        /* readMaze(fromFilename: "first", type: "maze") {
+            maze, error in
+            if let maze = maze {
+                addMaze(maze: maze)
+            }
+            if let error = error, let rootViewController = self.view?.window?.rootViewController {
+                 ErrorHandler.showError(error: error, onViewController: rootViewController)
+            }
         } */
         
         MazeHandler.sharedInstance.generateMaze(width: 20, height: 20, completion: {
-            maze in
+            maze, error in
             if let maze = maze {
                 self.addMaze(maze: maze)
                 self.resetMarble()
+            }
+            if let error = error, let rootViewController = self.view?.window?.rootViewController {
+                ErrorHandler.showError(error: error, onViewController: rootViewController)
             }
         })
         

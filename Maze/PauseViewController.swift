@@ -72,10 +72,13 @@ class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBAction func getNewMaze() {
         activityIndiactor?.startAnimating()
         MazeHandler.sharedInstance.generateMaze(width: mazeWidth, height: mazeHeight, completion: {
-            maze in
+            maze, error in
             DispatchQueue.main.async {
                 self.activityIndiactor?.stopAnimating()
                 self.updatePicker()
+            }
+            if let error = error {
+                ErrorHandler.showError(error: error, onViewController: self)
             }
         })
     }
@@ -116,17 +119,20 @@ class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
         do {
             try PrintManager.sharedInstance.uploadSTLFile {
-                success in
+                success, error in
                 if success {
                     do {
                         try PrintManager.sharedInstance.printUploadedSTLFile()
                     } catch let error {
-                        print("Error printing: ", error)
+                        ErrorHandler.showError(error: error, onViewController: self)
                     }
+                }
+                if let error = error {
+                    ErrorHandler.showError(error: error, onViewController: self)
                 }
             }
         } catch let error {
-            print("Error uploading: ", error)
+            ErrorHandler.showError(error: error, onViewController: self)
         }
     }
 
@@ -167,7 +173,7 @@ class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     // MARK: - PickerViewDelegate
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let _ = MazeHandler.sharedInstance.readMaze(fromFilename: sampleMazes[row], type: "maze")
+        MazeHandler.sharedInstance.readMaze(fromFilename: sampleMazes[row], type: "maze")
         
         if let currentMaze = MazeHandler.sharedInstance.currentMaze {
             mazeWidth = currentMaze.width
