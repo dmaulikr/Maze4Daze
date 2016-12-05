@@ -45,6 +45,14 @@ class MazeHandler {
                 currentMaze?.name = filename
                 self.notifyObserversOfNewMaze()
                 completion?(currentMaze, nil)
+                if let maze = self.currentMaze {
+                    self.fetchSTL(maze: maze) {
+                        _, error in
+                        if let error = error {
+                            ErrorHandler.showErrorOnRootViewController(error: error)
+                        }
+                    }
+                }
             } catch let error {
                 completion?(nil, error)
             }

@@ -182,15 +182,19 @@ class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     // MARK: - PickerViewDelegate
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        MazeHandler.sharedInstance.readMaze(fromFilename: sampleMazes[row], type: "maze")
-        
-        if let currentMaze = MazeHandler.sharedInstance.currentMaze {
-            mazeWidth = currentMaze.width
-            mazeHeight = currentMaze.height
+        if row >= sampleMazes.count {
+            getNewMaze()
+        } else {
+            MazeHandler.sharedInstance.readMaze(fromFilename: sampleMazes[row], type: "maze")
+            
+            if let currentMaze = MazeHandler.sharedInstance.currentMaze {
+                mazeWidth = currentMaze.width
+                mazeHeight = currentMaze.height
+            }
+            
+            updateLabels()
+            updateSliders()
         }
-        
-        updateLabels()
-        updateSliders()
     }
     
     
