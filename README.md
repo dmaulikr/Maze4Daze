@@ -11,11 +11,9 @@ Install [cocoapods](https://cocoapods.org). In the root directory of the project
 
 ## Usage
 
-When the app opens, the first thing it will do is download a new 20x20 maze. If the maze generation server is down, you can load one of three sample mazes included in the app. To do this, triple tap to go to the pause menu, select one of the mazes from the picker wheel, and then tap done to return to the maze.
+When the app opens, the first thing it will do is display a saved 10x10 maze ("medium"). Tilt the device to move the marble. Double tap to reset the marble to its original position.
 
-Tilt the device to move the marble. Double tap to reset the marble to its original position.
-
-To generate a new maze, triple tap to go to the pause screen. Use the sliders to control the new maze's size. Tap `Generate New Maze` to download a new maze. The spinner will indicate when the download has completed. Tap done to return to the maze.
+Triple tap to go to the pause menu. From there, you can choose one of three saved mazes (`small`, `medium`, and `large`) or generate a new maze by moving the sliders to the desired height and width and tapping `Generate New Maze`. The spinner will indicate when the download has completed. Tap done to return to the maze.
 
 To print the current maze, tap the `Print` button on the pause menu. If this button is greyed-out, it means the app is currently downloading the maze's STL file from the server. Once the button is active, pressing it will attempt to send the file to OctoPrint to be sliced and printed.
 
@@ -32,3 +30,5 @@ A singleton `MazeHandler` is responsible for requesting new mazes and STL files 
 `GameViewController` is the entry point of the app. It adds an `SKView` to the view hierarchy, which in turn presents an `SKScene`. `GameScene` handles displaying the maze, controlling the marble, and simulating physics.
 
 `PauseViewController` handles the UI for generating or selecting new mazes and printing the current maze.
+
+Errors in the app are reported to `ErrorHandler`, which creates a pop-up alert that contains a string containing the error message.
