@@ -134,6 +134,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate, MazeObserver {
             if tile.rightWall {
                 addWall(topLeft: CGPoint(x: tileX + tileWidth - wallThickness, y: size.height - tileY), bottomRight: CGPoint(x: tileX + tileWidth, y: size.height - (tileY + tileHeight)))
             }
+            
+            for corner in tile.corners {
+                switch corner {
+                case .topLeft:
+                    if tile.position.0 != 0 && tile.position.1 != 0 {
+                        addWall(topLeft: CGPoint(x: tileX - wallThickness, y: size.height - tileY + wallThickness), bottomRight: CGPoint(x: tileX, y: size.height - tileY))
+                    }
+                case .topRight:
+                    if tile.position.0 != maze.width - 1 && tile.position.1 != 0 {
+                        addWall(topLeft: CGPoint(x: tileX + tileWidth, y: size.height - tileY + wallThickness), bottomRight: CGPoint(x: tileX + tileWidth + wallThickness, y: size.height - tileY))
+                    }
+                case .bottomLeft:
+                    if tile.position.0 != 0 && tile.position.1 != maze.height - 1 {
+                        addWall(topLeft: CGPoint(x: tileX - wallThickness, y: size.height - (tileY + tileHeight)), bottomRight: CGPoint(x: tileX, y: size.height - (tileY + tileHeight) - wallThickness))
+                    }
+                case .bottomRight:
+                    if tile.position.0 != maze.width - 1 && tile.position.1 != maze.height - 1 {
+                        addWall(topLeft: CGPoint(x: tileX + tileWidth, y: size.height - (tileY + tileHeight)), bottomRight: CGPoint(x: tileX + tileWidth + wallThickness, y: size.height - (tileY + tileHeight) - wallThickness))
+                    }
+                }
+            }
         }
     }
     

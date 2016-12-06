@@ -106,13 +106,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Maze/GameScene.swift"
-            timestampString = "502748512.528245"
+            timestampString = "502760231.780448"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
-            landmarkName = "currentMazeDidChange(newMaze:)"
-            landmarkType = "7">
+            startingLineNumber = "226"
+            endingLineNumber = "226"
+            landmarkName = "+(_:_:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
