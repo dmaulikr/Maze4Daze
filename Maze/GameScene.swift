@@ -41,7 +41,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, MazeObserver {
         })
  */
         
-        backgroundColor = SKColor.white
+        backgroundColor = SKColor.black
         
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         physicsWorld.contactDelegate = self
@@ -97,22 +97,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate, MazeObserver {
     func resetMarble() {
         marble.removeFromParent()
         
-        addMarble(position: CGPoint(x: wallThickness, y: size.height - wallThickness), size: CGSize(width: min(tileWidth, tileHeight) - wallThickness * 2 - 1, height: min(tileWidth, tileHeight) - wallThickness * 2 - 1))
+        addMarble(position: CGPoint(x: wallThickness + widthOffset, y: size.height - wallThickness + heightOffset), size: CGSize(width: min(tileWidth, tileHeight) - wallThickness * 2 - 1, height: min(tileWidth, tileHeight) - wallThickness * 2 - 1))
     }
     
     var wallThickness: CGFloat = 5
     var tileWidth: CGFloat = 10
     var tileHeight: CGFloat = 10
+    var widthOffset: CGFloat = 0
+    var heightOffset: CGFloat = 0
     
     func addMaze(maze: Maze) {
         tileWidth = size.width / CGFloat(maze.width)
         tileHeight = size.height / CGFloat(maze.height)
         
+        tileWidth = min(tileWidth, tileHeight)
+        tileHeight = tileWidth
+        
+        widthOffset = (size.width - (tileWidth * CGFloat(maze.width))) / 2
+        heightOffset = (size.height - (tileHeight * CGFloat(maze.height))) / 2
+        
         wallThickness = min(tileWidth, tileHeight) / 5.0
         
         for tile in maze.tiles {
-            let tileX = tileWidth * CGFloat(tile.position.0)
-            let tileY = tileHeight * CGFloat(tile.position.1)
+            let tileX = tileWidth * CGFloat(tile.position.0) + widthOffset
+            let tileY = tileHeight * CGFloat(tile.position.1) + heightOffset
             
             if tile.bottomWall {
                 addWall(topLeft: CGPoint(x: tileX, y: size.height - (tileY + tileHeight - wallThickness)), bottomRight: CGPoint(x: tileX + tileWidth, y: size.height - (tileY + tileHeight)))
@@ -137,9 +145,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, MazeObserver {
     }
     
     func addWall(topLeft: CGPoint, bottomRight: CGPoint) {
-        let wall = SKSpriteNode(imageNamed: "Wall")
+//        let wall = SKSpriteNode(imageNamed: "Wall")
+        let wall = SKSpriteNode(color: UIColor.blue, size: CGSize(width: bottomRight.x - topLeft.x, height: topLeft.y - bottomRight.y))
         wall.name = "Wall"
-        wall.size = CGSize(width: bottomRight.x - topLeft.x, height: topLeft.y - bottomRight.y)
         wall.position = CGPoint(x: topLeft.x + ((bottomRight.x - topLeft.x) / 2.0), y: bottomRight.y + ((topLeft.y - bottomRight.y) / 2.0))
         
         wall.physicsBody = SKPhysicsBody(rectangleOf: wall.size)
@@ -190,4 +198,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, MazeObserver {
             resetMarble()
         }
     }
+}
+
+func +(lhs: CGPoint, rhs: CGPoint) -> CGPoint {
+    return CGPoint(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
 }
