@@ -150,6 +150,10 @@ class MazeHandler {
             observer.currentMazeGotSTLFile()
         }
     }
+    
+    func assignMarbleSize(marbleSize: Int) {
+        currentMaze?.marbleSize = marbleSize
+    }
 }
 
 

@@ -50,7 +50,7 @@
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="20" minValue="3" maxValue="50" translatesAutoresizingMaskIntoConstraints="NO" id="nDL-BK-AMn">
-                                <rect key="frame" x="236" y="286" width="552" height="31"/>
+                                <rect key="frame" x="236" y="268" width="552" height="31"/>
                                 <connections>
                                     <action selector="sliderChangedWithSlider:" destination="wXE-ed-VEV" eventType="valueChanged" id="DXb-kJ-IXy"/>
                                 </connections>
@@ -62,7 +62,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Height" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fg1-wR-VHO">
-                                <rect key="frame" x="124" y="284" width="83" height="34"/>
+                                <rect key="frame" x="124" y="266" width="83" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -85,14 +85,14 @@
                                 <rect key="frame" x="749" y="128" width="20" height="20"/>
                             </activityIndicatorView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Uq-nl-SSp">
-                                <rect key="frame" x="0.0" y="397" width="1024" height="216"/>
+                                <rect key="frame" x="0.0" y="379" width="1024" height="216"/>
                                 <connections>
                                     <outlet property="dataSource" destination="wXE-ed-VEV" id="EV2-xQ-K6e"/>
                                     <outlet property="delegate" destination="wXE-ed-VEV" id="HmH-uZ-uFo"/>
                                 </connections>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Sb-br-whd">
-                                <rect key="frame" x="464" y="653" width="97" height="70"/>
+                                <rect key="frame" x="464" y="635" width="97" height="70"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="48"/>
                                 <state key="normal" title="Print"/>
                                 <connections>
@@ -111,7 +111,25 @@
                                 </items>
                             </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K8J-ew-kZR">
-                                <rect key="frame" x="823" y="284" width="34" height="34"/>
+                                <rect key="frame" x="823" y="266" width="34" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Marble Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2q6-92-6Yf">
+                                <rect key="frame" x="62" y="319" width="145" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="1" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="SR1-Sx-Niq">
+                                <rect key="frame" x="236" y="321" width="552" height="31"/>
+                                <connections>
+                                    <action selector="sliderChangedWithSlider:" destination="wXE-ed-VEV" eventType="valueChanged" id="acJ-UA-61P"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqe-aT-WRA">
+                                <rect key="frame" x="823" y="319" width="34" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -123,14 +141,20 @@
                             <constraint firstItem="m7Q-Uz-WDX" firstAttribute="centerY" secondItem="iYG-cs-aWS" secondAttribute="centerY" id="46W-ZJ-We9"/>
                             <constraint firstItem="4Uq-nl-SSp" firstAttribute="leading" secondItem="rt3-f2-ZiO" secondAttribute="leadingMargin" constant="-20" id="4aJ-Yd-g4f"/>
                             <constraint firstItem="fg1-wR-VHO" firstAttribute="centerY" secondItem="nDL-BK-AMn" secondAttribute="centerY" id="4gC-12-AVM"/>
+                            <constraint firstItem="SR1-Sx-Niq" firstAttribute="top" secondItem="nDL-BK-AMn" secondAttribute="bottom" constant="23" id="907-Lm-rjz"/>
+                            <constraint firstItem="SR1-Sx-Niq" firstAttribute="leading" secondItem="nDL-BK-AMn" secondAttribute="leading" id="9xz-Y4-IZ8"/>
+                            <constraint firstItem="pqe-aT-WRA" firstAttribute="centerX" secondItem="K8J-ew-kZR" secondAttribute="centerX" id="DZm-1c-dl9"/>
+                            <constraint firstItem="4Uq-nl-SSp" firstAttribute="top" secondItem="SR1-Sx-Niq" secondAttribute="bottom" constant="28" id="HmM-ex-KFP"/>
                             <constraint firstItem="iYG-cs-aWS" firstAttribute="leading" secondItem="m7Q-Uz-WDX" secondAttribute="trailing" constant="31" id="INQ-LC-LlK"/>
-                            <constraint firstItem="4Uq-nl-SSp" firstAttribute="top" secondItem="nDL-BK-AMn" secondAttribute="bottom" constant="81" id="LJM-xP-4vA"/>
                             <constraint firstItem="poe-wW-RMM" firstAttribute="top" secondItem="zas-Vv-OUE" secondAttribute="bottom" constant="39" id="MgR-1z-kkG"/>
                             <constraint firstItem="Kb9-oI-px3" firstAttribute="centerY" secondItem="poe-wW-RMM" secondAttribute="centerY" id="PFA-4V-3tQ"/>
+                            <constraint firstItem="SR1-Sx-Niq" firstAttribute="trailing" secondItem="nDL-BK-AMn" secondAttribute="trailing" id="QUq-8A-feO"/>
+                            <constraint firstItem="SR1-Sx-Niq" firstAttribute="centerY" secondItem="2q6-92-6Yf" secondAttribute="centerY" id="TMc-mW-9f8"/>
                             <constraint firstItem="Kb9-oI-px3" firstAttribute="leading" secondItem="poe-wW-RMM" secondAttribute="trailing" constant="24" id="TsT-6g-Ryx"/>
                             <constraint firstItem="9Sb-br-whd" firstAttribute="centerX" secondItem="rt3-f2-ZiO" secondAttribute="centerX" id="Txt-6z-aZ0"/>
                             <constraint firstItem="fg1-wR-VHO" firstAttribute="trailing" secondItem="m7Q-Uz-WDX" secondAttribute="trailing" id="V8M-xQ-48h"/>
                             <constraint firstItem="nDL-BK-AMn" firstAttribute="width" secondItem="iYG-cs-aWS" secondAttribute="width" id="VEg-M4-2fR"/>
+                            <constraint firstItem="2q6-92-6Yf" firstAttribute="trailing" secondItem="fg1-wR-VHO" secondAttribute="trailing" id="Z9A-Yq-JUV"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zas-Vv-OUE" secondAttribute="trailing" constant="-20" id="Zet-BE-SnR"/>
                             <constraint firstItem="K8J-ew-kZR" firstAttribute="leading" secondItem="Pkt-Jc-1hd" secondAttribute="leading" id="arD-iN-Seo"/>
                             <constraint firstItem="9Sb-br-whd" firstAttribute="top" secondItem="4Uq-nl-SSp" secondAttribute="bottom" constant="40" id="bqY-Aq-FSA"/>
@@ -139,10 +163,11 @@
                             <constraint firstAttribute="trailingMargin" secondItem="4Uq-nl-SSp" secondAttribute="trailing" constant="-20" id="em5-wJ-2Ak"/>
                             <constraint firstItem="iYG-cs-aWS" firstAttribute="top" secondItem="poe-wW-RMM" secondAttribute="bottom" constant="37" id="ila-Ky-0My"/>
                             <constraint firstItem="iYG-cs-aWS" firstAttribute="centerX" secondItem="rt3-f2-ZiO" secondAttribute="centerX" id="mfi-c7-QKI"/>
-                            <constraint firstItem="nDL-BK-AMn" firstAttribute="top" secondItem="iYG-cs-aWS" secondAttribute="bottom" constant="46" id="nx4-Xh-m95"/>
+                            <constraint firstItem="nDL-BK-AMn" firstAttribute="top" secondItem="iYG-cs-aWS" secondAttribute="bottom" constant="28" id="nx4-Xh-m95"/>
                             <constraint firstItem="zas-Vv-OUE" firstAttribute="leading" secondItem="rt3-f2-ZiO" secondAttribute="leadingMargin" constant="-20" id="oX5-0M-9ul"/>
                             <constraint firstItem="poe-wW-RMM" firstAttribute="centerX" secondItem="rt3-f2-ZiO" secondAttribute="centerX" id="obH-2f-sHt"/>
                             <constraint firstItem="Pkt-Jc-1hd" firstAttribute="centerY" secondItem="iYG-cs-aWS" secondAttribute="centerY" id="pLj-R7-5i7"/>
+                            <constraint firstItem="pqe-aT-WRA" firstAttribute="centerY" secondItem="SR1-Sx-Niq" secondAttribute="centerY" id="pyV-Or-WMD"/>
                             <constraint firstItem="zas-Vv-OUE" firstAttribute="top" secondItem="ybm-17-wD8" secondAttribute="bottom" id="wfb-Yr-x1W"/>
                         </constraints>
                     </view>
@@ -150,6 +175,8 @@
                         <outlet property="activityIndiactor" destination="Kb9-oI-px3" id="2ZE-ZJ-jIZ"/>
                         <outlet property="heightLabel" destination="K8J-ew-kZR" id="0Zd-rj-xJj"/>
                         <outlet property="heightSlider" destination="nDL-BK-AMn" id="BeQ-Gg-T6G"/>
+                        <outlet property="marbleSizeLabel" destination="pqe-aT-WRA" id="Sax-GR-XIp"/>
+                        <outlet property="marbleSizeSlider" destination="SR1-Sx-Niq" id="QpA-O8-0eJ"/>
                         <outlet property="mazePicker" destination="4Uq-nl-SSp" id="Ev4-LY-2sO"/>
                         <outlet property="printButton" destination="9Sb-br-whd" id="0Cv-dE-yAG"/>
                         <outlet property="widthLabel" destination="Pkt-Jc-1hd" id="vBm-Pt-kiG"/>

@@ -97,7 +97,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, MazeObserver {
     func resetMarble() {
         marble.removeFromParent()
         
-        addMarble(position: CGPoint(x: wallThickness + widthOffset, y: size.height - wallThickness + heightOffset), size: CGSize(width: min(tileWidth, tileHeight) - wallThickness * 2 - 1, height: min(tileWidth, tileHeight) - wallThickness * 2 - 1))
+        addMarble(position: CGPoint(x: wallThickness + widthOffset, y: size.height - wallThickness - heightOffset), size: CGSize(width: min(tileWidth, tileHeight) - wallThickness * 2 - 1, height: min(tileWidth, tileHeight) - wallThickness * 2 - 1))
     }
     
     var wallThickness: CGFloat = 5

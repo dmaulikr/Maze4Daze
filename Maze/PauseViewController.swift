@@ -12,9 +12,11 @@ class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     @IBOutlet var widthSlider: UISlider?
     @IBOutlet var heightSlider: UISlider?
+    @IBOutlet var marbleSizeSlider: UISlider?
     
     @IBOutlet var widthLabel: UILabel?
     @IBOutlet var heightLabel: UILabel?
+    @IBOutlet var marbleSizeLabel: UILabel?
     
     @IBOutlet var activityIndiactor: UIActivityIndicatorView?
     @IBOutlet var printButton: UIButton?
@@ -90,6 +92,13 @@ class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         if slider == heightSlider {
             mazeHeight = Int(slider.value)
         }
+        if slider == marbleSizeSlider {
+            MazeHandler.sharedInstance.assignMarbleSize(marbleSize: Int(slider.value))
+            if let currentMaze = MazeHandler.sharedInstance.currentMaze {
+                printButton?.isEnabled = false
+                MazeHandler.sharedInstance.fetchSTL(maze: currentMaze)
+            }
+        }
         
         updateLabels()
     }
@@ -97,11 +106,17 @@ class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     func updateLabels() {
         widthLabel?.text = String(format: "%d", mazeWidth)
         heightLabel?.text = String(format: "%d", mazeHeight)
+        if let currentMaze = MazeHandler.sharedInstance.currentMaze {
+            marbleSizeLabel?.text = String(format: "%d", currentMaze.marbleSize)
+        }
     }
     
     func updateSliders() {
         widthSlider?.value = Float(mazeWidth)
         heightSlider?.value = Float(mazeHeight)
+        if let currentMaze = MazeHandler.sharedInstance.currentMaze {
+            marbleSizeSlider?.value = Float(currentMaze.marbleSize)
+        }
     }
     
     func updatePrintButton() {
@@ -210,6 +225,8 @@ class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     func currentMazeDidChange(newMaze: Maze?) {
         updatePrintButton()
+        updateLabels()
+        updateSliders()
     }
 
 }
