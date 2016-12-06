@@ -13,9 +13,11 @@ Install [cocoapods](https://cocoapods.org). In the root directory of the project
 
 When the app opens, the first thing it will do is display a saved 10x10 maze ("medium"). Tilt the device to move the marble. Double tap to reset the marble to its original position.
 
-Triple tap to go to the pause menu. From there, you can choose one of three saved mazes (`small`, `medium`, and `large`) or generate a new maze by moving the sliders to the desired height and width and tapping `Generate New Maze`. The spinner will indicate when the download has completed. Tap done to return to the maze.
+Triple tap to go to the pause menu. From there, you can choose one of three saved mazes (`small`, `medium`, and `large`) or generate a new maze by moving the sliders to the desired height and width. The spinner will indicate when the download has completed. Tap done to return to the maze.
 
 To print the current maze, tap the `Print` button on the pause menu. If this button is greyed-out, it means the app is currently downloading the maze's STL file from the server. Once the button is active, pressing it will attempt to send the file to OctoPrint to be sliced and printed.
+
+Adjust the marble size with the slider to download a new STL which will accommodate marbles of that size (in millimeters). (NOTE: Marble size does not change the size of the maze in the app, but it does affect the maze sent to the printer.)
 
 ## Bugs
 

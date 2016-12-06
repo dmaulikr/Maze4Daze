@@ -41,6 +41,8 @@ class ErrorHandler {
             errorString = "Could not serialize maze data as UTF-8"
         case DataError.HTTPResponse:
             errorString = "Could not read HTTP response data"
+        case DataError.BadSTLParam:
+            errorString = "There was a problem generating the STL file for these parameters"
         default:
             errorString = error.localizedDescription
         }

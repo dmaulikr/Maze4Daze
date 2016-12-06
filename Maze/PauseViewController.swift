@@ -71,7 +71,7 @@ class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func getNewMaze() {
+    func getNewMaze() {
         activityIndiactor?.startAnimating()
         MazeHandler.sharedInstance.generateMaze(width: mazeWidth, height: mazeHeight, completion: {
             maze, error in
@@ -94,13 +94,26 @@ class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
         if slider == marbleSizeSlider {
             MazeHandler.sharedInstance.assignMarbleSize(marbleSize: Int(slider.value))
-            if let currentMaze = MazeHandler.sharedInstance.currentMaze {
-                printButton?.isEnabled = false
-                MazeHandler.sharedInstance.fetchSTL(maze: currentMaze)
-            }
         }
         
         updateLabels()
+    }
+    
+    @IBAction func sliderFinished(slider: UISlider) {
+        if slider == widthSlider || slider == heightSlider {
+            getNewMaze()
+        }
+        if slider == marbleSizeSlider {
+            if let currentMaze = MazeHandler.sharedInstance.currentMaze {
+                printButton?.isEnabled = false
+                MazeHandler.sharedInstance.fetchSTL(maze: currentMaze) {
+                    _, error in
+                    if let error = error {
+                        ErrorHandler.showError(error: error, onViewController: self)
+                    }
+                }
+            }
+        }
     }
     
     func updateLabels() {

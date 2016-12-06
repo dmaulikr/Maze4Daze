@@ -23,6 +23,7 @@ extension MazeObserver {
 enum DataError: Error {
     case UTF8Serialization
     case HTTPResponse
+    case BadSTLParam
 }
 
 class MazeHandler {
@@ -99,7 +100,10 @@ class MazeHandler {
         let parameters: [String: Any] = ["maze": maze.raw, "marble": maze.marbleSize]
         Alamofire.request(stlURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).response { response in
             if let currentMaze = self.currentMaze, currentMaze == maze {
-                if let data = response.data, data.count > 0 {
+                if response.response?.statusCode != 200 {
+                    completion?(false, DataError.BadSTLParam)
+                }
+                else if let data = response.data, data.count > 0 {
                     do {
                         try PrintManager.sharedInstance.storeSTLFile(stlData: data)
                         self.currentMaze?.stlDownloaded = true
