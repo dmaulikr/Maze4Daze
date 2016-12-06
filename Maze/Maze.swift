@@ -84,9 +84,7 @@ struct Maze {
     let uuid: String
     var stlDownloaded: Bool = false
     
-    var marbleSize: Int
-    
-    init(width: Int, height: Int, tiles: [Tile], raw: String, marbleSize: Int = 15) {
+    init(width: Int, height: Int, tiles: [Tile], raw: String) {
         self.width = width
         self.height = height
         
@@ -94,9 +92,7 @@ struct Maze {
         
         self.raw = raw
         
-        self.uuid = UUID().uuidString
-        
-        self.marbleSize = marbleSize
+        self.uuid = UUID().uuidString        
     }
     
     static var empty: Maze {

@@ -31,6 +31,8 @@ class MazeHandler {
     
     var currentMaze: Maze? = nil
     
+    var marbleSize: Int = 15
+    
     var mazeObservers = [MazeObserver]()
     
     private static let serverURL = "http://52.34.211.66:9000/"
@@ -97,7 +99,7 @@ class MazeHandler {
             return
         }
         let stlURL = MazeHandler.serverURL + "stl"
-        let parameters: [String: Any] = ["maze": maze.raw, "marble": maze.marbleSize]
+        let parameters: [String: Any] = ["maze": maze.raw, "marble": marbleSize]
         Alamofire.request(stlURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).response { response in
             if let currentMaze = self.currentMaze, currentMaze == maze {
                 if response.response?.statusCode != 200 {
@@ -153,10 +155,6 @@ class MazeHandler {
         for observer in mazeObservers {
             observer.currentMazeGotSTLFile()
         }
-    }
-    
-    func assignMarbleSize(marbleSize: Int) {
-        currentMaze?.marbleSize = marbleSize
     }
 }
 

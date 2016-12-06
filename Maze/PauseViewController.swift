@@ -93,7 +93,7 @@ class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             mazeHeight = Int(slider.value)
         }
         if slider == marbleSizeSlider {
-            MazeHandler.sharedInstance.assignMarbleSize(marbleSize: Int(slider.value))
+            MazeHandler.sharedInstance.marbleSize = Int(slider.value)
         }
         
         updateLabels()
@@ -119,17 +119,13 @@ class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     func updateLabels() {
         widthLabel?.text = String(format: "%d", mazeWidth)
         heightLabel?.text = String(format: "%d", mazeHeight)
-        if let currentMaze = MazeHandler.sharedInstance.currentMaze {
-            marbleSizeLabel?.text = String(format: "%d", currentMaze.marbleSize)
-        }
+        marbleSizeLabel?.text = String(format: "%d", MazeHandler.sharedInstance.marbleSize)
     }
     
     func updateSliders() {
         widthSlider?.value = Float(mazeWidth)
         heightSlider?.value = Float(mazeHeight)
-        if let currentMaze = MazeHandler.sharedInstance.currentMaze {
-            marbleSizeSlider?.value = Float(currentMaze.marbleSize)
-        }
+        marbleSizeSlider?.value = Float(MazeHandler.sharedInstance.marbleSize)
     }
     
     func updatePrintButton() {
@@ -236,7 +232,7 @@ class PauseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         updatePrintButton()
     }
     
-    func currentMazeDidChange(newMaze: Maze?) {
+    func currentMazeDidChange(newMaze: Maze?) {        
         updatePrintButton()
         updateLabels()
         updateSliders()
